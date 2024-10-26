@@ -1,6 +1,7 @@
 package com.example.mephi_android_homework_1
 
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP
 import android.os.Bundle
 import android.util.Log
@@ -27,7 +28,8 @@ class ActivityC : AppCompatActivity() {
 
     private fun startActivityA() {
         val intent = singleTopIntentTo<ActivityA>().apply {
-            addFlags(FLAG_ACTIVITY_CLEAR_TOP)
+//            addFlags(FLAG_ACTIVITY_CLEAR_TOP)
+            addFlags(FLAG_ACTIVITY_NEW_TASK)
         }
         startActivity(intent)
     }

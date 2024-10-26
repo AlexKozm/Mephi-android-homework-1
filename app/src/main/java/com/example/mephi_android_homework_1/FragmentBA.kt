@@ -14,13 +14,15 @@ const val COLOR_REQUEST = "color_request"
 const val BACKGROUND_COLOR = "background_color"
 
 class FragmentBA : Fragment(R.layout.fragment_b_a) {
+
     @ColorInt
     var backgroundColor: Int? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        savedInstanceState?.getInt(BACKGROUND_COLOR)?.let { backgroundColor = it }
+        savedInstanceState?.getString(BACKGROUND_COLOR)?.toInt()?.let { backgroundColor = it }
+        savedInstanceState?.get(BACKGROUND_COLOR)?.let { it as? Int? }?.let { backgroundColor = it }
         backgroundColor?.let { view.setBackgroundColor(it) }
 
         view.setOnClickListenerTo(R.id.button_to_fragment_bb) {
@@ -39,10 +41,12 @@ class FragmentBA : Fragment(R.layout.fragment_b_a) {
                     backgroundColor = newColor
                 }
         }
+
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        backgroundColor?.let { outState.putInt(BACKGROUND_COLOR, it) }
+        backgroundColor?.let { outState.putString(BACKGROUND_COLOR, it.toString()) }
     }
 }

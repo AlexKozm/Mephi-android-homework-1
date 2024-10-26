@@ -1,6 +1,7 @@
 package com.example.mephi_android_homework_1
 
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import android.util.Log
@@ -16,11 +17,11 @@ class ActivityA : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_a)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+//            insets
+//        }
 
         Log.i(TAG, "onCreate")
 
@@ -37,6 +38,7 @@ class ActivityA : AppCompatActivity() {
     private fun startActivityB(withFragment: Boolean = false) {
         val intent = singleTopIntentTo<ActivityB>().apply {
             addFlags(FLAG_ACTIVITY_NEW_TASK)
+            addFlags(FLAG_ACTIVITY_CLEAR_TOP)
             putExtra(WITH_FRAGMENT, withFragment)
         }
         startActivity(intent)
